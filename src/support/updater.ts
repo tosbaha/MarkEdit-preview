@@ -26,7 +26,7 @@ export async function checkForUpdates() {
     return;
   }
 
-  if (release.name === __PKG_VERSION__) {
+  if (!isVersionNewer(release.name, __PKG_VERSION__)) {
     // Up to date
     return;
   }
@@ -200,6 +200,22 @@ function updateUserInfo(release: Release, onDismiss = () => {}) {
   ];
 
   return { title, actions };
+}
+
+function isVersionNewer(releaseVersion: string, currentVersion: string): boolean {
+  const stripV = (v: string) => v.startsWith('v') ? v.slice(1) : v;
+  const parse = (v: string) => stripV(v).split('.').map(Number);
+
+  const releaseParts = parse(releaseVersion);
+  const currentParts = parse(currentVersion);
+
+  for (let i = 0; i < Math.max(releaseParts.length, currentParts.length); i++) {
+    const r = releaseParts[i] ?? 0;
+    const c = currentParts[i] ?? 0;
+    if (r !== c) return r > c;
+  }
+
+  return false; // identical
 }
 
 function skippedVersions(): Set<string> {
