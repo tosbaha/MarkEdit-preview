@@ -89,7 +89,6 @@ body {
   font-weight: 500;
   padding: 2px 16px;
   border-radius: 4px;
-  cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
   min-width: 64px;
@@ -103,6 +102,16 @@ body {
   background: #ffffff;
   color: #000000;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.quicklook-segment-icon {
+  display: none;
+}
+
+.quicklook-segment-icon svg {
+  display: block;
+  width: 13px;
+  height: 13px;
 }
 
 /* Compact layout: hide the toolbar and show floating buttons */
@@ -123,8 +132,8 @@ body {
 
   .quicklook-toolbar {
     top: 6px;
+    right: 6px;
     left: auto;
-    right: 8px;
     height: auto;
     background: transparent !important;
     border-bottom: none !important;
@@ -155,7 +164,7 @@ body {
   .quicklook-segmented {
     pointer-events: auto;
     padding: 0;
-    gap: 2px;
+    gap: 0;
     overflow: hidden;
     background: rgba(242, 242, 245, 0.85);
     backdrop-filter: saturate(180%) blur(12px);
@@ -165,14 +174,25 @@ body {
   }
 
   .quicklook-segment {
-    font-size: 11px;
-    padding: 2px 4px;
+    padding: 2px 3px;
     min-width: 0;
-    border-radius: 4px;
+  }
+
+  .quicklook-segment:hover:not(.active) {
+    background: transparent;
   }
 
   .quicklook-segment.active {
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  }
+
+  .quicklook-segment-label {
+    display: none;
+  }
+
+  .quicklook-segment-icon {
+    display: flex;
+    padding: 1px 2px;
   }
 }
 
@@ -210,6 +230,10 @@ body {
     background: rgba(40, 40, 42, 0.85);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
     border-color: rgba(128, 128, 128, 0.15);
+  }
+
+  .quicklook-segment:hover:not(.active) {
+    background: transparent;
   }
 
   .quicklook-segment.active {
