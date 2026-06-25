@@ -24,7 +24,7 @@ const requireShim = '"use strict";' + transformSync(readFileSync(shimPath, 'utf8
   sourcefile: 'shim.ts',
 }).code.trim();
 
-export default defineConfig(mergeConfig(defaultViteConfig({ outDir }), {
+export default defineConfig(mergeConfig(defaultViteConfig({ outDir, destDir: '/Library/Containers/app.cyan.markedit-dev/Data/Documents/scripts/' }), {
   define: {
     __PKG_VERSION__: JSON.stringify(mainPackage.version),
     __FULL_BUILD__: JSON.stringify(!liteBuild),
